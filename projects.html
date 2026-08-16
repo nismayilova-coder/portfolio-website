@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Nilufar Ismayilova</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="wrap">
+  <nav class="site-nav">
+    <a class="brand" href="index.html">Nilufar Ismayilova</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="section" style="border-top:none; padding-top:40px; padding-bottom:0;">
+    <div class="section-label">Selected Work</div>
+    <h2>Projects</h2>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="project-card">
+      <div>
+        <div class="status-badge status-live">Live</div>
+        <div class="project-meta">Personal Project · Node.js</div>
+        <h3>Private Finance Dashboard</h3>
+        <p>
+          A local, privacy-first budgeting app that reads bank statements
+          (CSV, Excel, PDF) straight from your computer — no cloud, no bank
+          login, nothing ever uploaded. It parses statements from four
+          different banks across two countries, categorizes spending, and
+          tracks savings goals.
+        </p>
+        <p>
+          The part I'm most proud of: a monthly spending forecast built on
+          least-squares linear regression per category, trained only on
+          completed months so the current partial month doesn't bias the
+          trend. It falls back to a plain average when the fit is too weak
+          (r² &lt; 0.3) or history is too short — a small but deliberate
+          choice to avoid presenting a shaky trend as a confident number.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">Vanilla JS</span>
+          <span class="tag">Linear Regression</span>
+          <span class="tag">Time-series Forecasting</span>
+          <span class="tag">36 unit tests</span>
+        </div>
+        <div class="project-links">
+          <a class="btn btn-solid" href="https://github.com/nismayilova-coder/banking-app" target="_blank" rel="noopener">View Code</a>
+        </div>
+      </div>
+      <div class="project-shot">Screenshot coming soon</div>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="status-badge status-progress">In Progress</div>
+        <div class="project-meta">Personal Project · Python</div>
+        <h3>arXiv Research Agent</h3>
+        <p>
+          An autonomous agent that monitors new arXiv papers in machine
+          learning and NLP, summarizes them, and scores their relevance
+          against a set of research interests — search, fetch, extract,
+          summarize, and score, using real tool-calling rather than a
+          single prompt-and-respond wrapper.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Claude API</span>
+          <span class="tag">Tool Use</span>
+          <span class="tag">arXiv API</span>
+        </div>
+      </div>
+      <div class="project-shot">Coming soon</div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="site-footer">
+    <span>© 2026 Nilufar Ismayilova</span>
+    <div class="footer-links">
+      <a href="mailto:ismayilovanilufar6@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/nilufar-ismayilova-27a9a2225" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/nismayilova-coder" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
