@@ -26,8 +26,8 @@
     <div class="section-label">Selected Work</div>
     <h2>Personal Projects</h2>
 
-    <div class="project-card">
-      <div>
+    <div class="project-card stacked">
+      <div class="project-lead">
         <div class="status-badge status-live">Live</div>
         <div class="project-meta">Personal Project · Node.js</div>
         <h3>Private Finance Dashboard</h3>
@@ -57,20 +57,39 @@
           <a class="btn btn-solid" href="https://github.com/nismayilova-coder/banking-app" target="_blank" rel="noopener">View Code</a>
         </div>
       </div>
-      <div>
-        <div class="shot-collage">
-          <button class="shot shot-wide" data-full="assets/img/shots/banking-overview.jpg">
-            <img src="assets/img/shots/banking-overview.jpg" alt="The dashboard: running balance, balance history and monthly money flow" loading="lazy">
-          </button>
-          <button class="shot" data-full="assets/img/shots/banking-forecast.jpg">
-            <img src="assets/img/shots/banking-forecast.jpg" alt="Next month's forecast: predicted net, income and spending, broken down by category" loading="lazy">
-          </button>
-          <button class="shot" data-full="assets/img/shots/banking-spending.jpg">
-            <img src="assets/img/shots/banking-spending.jpg" alt="Spending tab: category breakdown and recurring monthly commitments" loading="lazy">
-          </button>
+      <div class="carousel" data-carousel>
+        <div class="carousel-track">
+          <figure class="slide">
+            <button class="shot" data-full="assets/img/shots/banking-overview.jpg">
+              <img src="assets/img/shots/banking-overview.jpg" alt="The dashboard: running balance, balance history and monthly money flow">
+            </button>
+            <figcaption>The dashboard. Running balance, daily balance history, and money flow by month.</figcaption>
+          </figure>
+          <figure class="slide">
+            <button class="shot" data-full="assets/img/shots/banking-forecast.jpg">
+              <img src="assets/img/shots/banking-forecast.jpg" alt="Next month's forecast: predicted net, income and spending, broken down by category" loading="lazy">
+            </button>
+            <figcaption>Next month's forecast, per category. Net is derived from income minus spending, so the three figures always reconcile.</figcaption>
+          </figure>
+          <figure class="slide">
+            <button class="shot" data-full="assets/img/shots/banking-spending.jpg">
+              <img src="assets/img/shots/banking-spending.jpg" alt="Spending tab: category breakdown and recurring monthly commitments" loading="lazy">
+            </button>
+            <figcaption>Spending by category for any month, plus the fixed commitments that repeat every month.</figcaption>
+          </figure>
+          <figure class="slide">
+            <button class="shot" data-full="assets/img/shots/banking-goals.jpg">
+              <img src="assets/img/shots/banking-goals.jpg" alt="Goals tab: two savings goals with progress bars and feasibility against projected leftover" loading="lazy">
+            </button>
+            <figcaption>Savings goals, each checked against your projected monthly leftover rather than a flat average.</figcaption>
+          </figure>
         </div>
-        <div class="shot-caption">Running on fabricated statements, not real financial data. Click any image to enlarge.</div>
+
+        <button class="carousel-arrow prev" data-prev aria-label="Previous screenshot">‹</button>
+        <button class="carousel-arrow next" data-next aria-label="Next screenshot">›</button>
+        <div class="carousel-dots" data-dots></div>
       </div>
+      <div class="shot-caption">Running on fabricated statements, not real financial data. Click any image to enlarge.</div>
     </div>
 
     <div class="project-card">
@@ -138,6 +157,40 @@
 </div>
 
 <script>
+  // Carousel. Scrolling itself is CSS scroll-snap, so this only syncs the
+  // arrows and dots to whichever slide is currently in view.
+  document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector('.carousel-track');
+    const slides = [...carousel.querySelectorAll('.slide')];
+    const dots = carousel.querySelector('[data-dots]');
+    const prev = carousel.querySelector('[data-prev]');
+    const next = carousel.querySelector('[data-next]');
+
+    const current = () => Math.round(track.scrollLeft / track.clientWidth);
+    const goTo = (i) => track.scrollTo({ left: i * track.clientWidth });
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.setAttribute('aria-label', `Screenshot ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dots.appendChild(dot);
+    });
+
+    function sync() {
+      const i = current();
+      [...dots.children].forEach((d, n) =>
+        d.setAttribute('aria-current', String(n === i)));
+      prev.disabled = i === 0;
+      next.disabled = i === slides.length - 1;
+    }
+
+    prev.addEventListener('click', () => goTo(current() - 1));
+    next.addEventListener('click', () => goTo(current() + 1));
+    track.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  });
+
   // Click any .shot to view it full size; Esc or a click anywhere closes it.
   (function () {
     const box = document.getElementById('lightbox');
