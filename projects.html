@@ -57,7 +57,20 @@
           <a class="btn btn-solid" href="https://github.com/nismayilova-coder/banking-app" target="_blank" rel="noopener">View Code</a>
         </div>
       </div>
-      <div class="project-shot">Screenshot coming soon</div>
+      <div>
+        <div class="shot-collage">
+          <button class="shot shot-wide" data-full="assets/img/shots/banking-overview.jpg">
+            <img src="assets/img/shots/banking-overview.jpg" alt="The dashboard: running balance, balance history and monthly money flow" loading="lazy">
+          </button>
+          <button class="shot" data-full="assets/img/shots/banking-forecast.jpg">
+            <img src="assets/img/shots/banking-forecast.jpg" alt="Next month's forecast: predicted net, income and spending, broken down by category" loading="lazy">
+          </button>
+          <button class="shot" data-full="assets/img/shots/banking-spending.jpg">
+            <img src="assets/img/shots/banking-spending.jpg" alt="Spending tab: category breakdown and recurring monthly commitments" loading="lazy">
+          </button>
+        </div>
+        <div class="shot-caption">Running on fabricated statements, not real financial data. Click any image to enlarge.</div>
+      </div>
     </div>
 
     <div class="project-card">
@@ -111,14 +124,48 @@
         </div>
       </div>
       <div>
-        <div class="project-shot has-image">
-          <img src="assets/img/pikogpt-poster.jpg" alt="Research poster: DropOuters, Compact GPT style LM from scratch, University of St. Gallen" width="1100" height="1339">
-        </div>
-        <div class="shot-caption">Poster presented at the University of St. Gallen, June 2026.</div>
+        <button class="shot" data-full="assets/img/pikogpt-poster.jpg">
+          <img src="assets/img/pikogpt-poster.jpg" alt="Research poster: DropOuters, Compact GPT style LM from scratch, University of St. Gallen" loading="lazy">
+        </button>
+        <div class="shot-caption">Poster presented at the University of St. Gallen, June 2026. Click to enlarge.</div>
       </div>
     </div>
   </section>
 </main>
+
+<div class="lightbox" id="lightbox" hidden>
+  <img alt="">
+</div>
+
+<script>
+  // Click any .shot to view it full size; Esc or a click anywhere closes it.
+  (function () {
+    const box = document.getElementById('lightbox');
+    const img = box.querySelector('img');
+
+    document.addEventListener('click', (e) => {
+      const shot = e.target.closest('.shot');
+      if (shot) {
+        img.src = shot.dataset.full;
+        img.alt = shot.querySelector('img').alt;
+        box.hidden = false;
+        document.body.style.overflow = 'hidden';
+        return;
+      }
+      if (!box.hidden) {
+        box.hidden = true;
+        document.body.style.overflow = '';
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !box.hidden) {
+        box.hidden = true;
+        document.body.style.overflow = '';
+      }
+    });
+  })();
+</script>
 
 <footer class="wrap">
   <div class="site-footer">
