@@ -201,10 +201,21 @@ a.link:hover { border-color: var(--accent); }
   object-fit: cover;
   display: block;
 }
-.about-bio p { font-size: 17px; margin: 0 0 20px; max-width: 60ch; }
+.about-bio p { font-size: 17px; margin: 0 0 22px; max-width: 62ch; }
+.about-bio .lede {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+/* The bio runs long, so the portrait follows the reader instead of leaving a
+   tall empty column beside it. */
+.about-photo { position: sticky; top: 36px; }
 @media (max-width: 720px) {
-  .about-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 36px; }
+  .about-photo { position: static; max-width: 260px; }
   .photo-slot { max-width: 260px; }
+  .about-bio .lede { font-size: 20px; }
 }
 
 /* ---------- timeline ---------- */
